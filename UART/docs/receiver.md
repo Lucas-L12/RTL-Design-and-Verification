@@ -18,6 +18,10 @@ The receiver is implemented as a Finite State Machine with Datapath (FSMD).
 - **Stop**: Waits for stop bit and signals completion
 
 ---
+The receiver takes `rx` (serial data) and `s_tick` (sampling tick from the baud rate generator) as inputs. 
+
+It outputs `dout` (received data) and `rx_done_tick`, which acts as a flag to indicate that a new byte has been received and is ready for the RX interface.
+---
 
 ## Key Features
 
