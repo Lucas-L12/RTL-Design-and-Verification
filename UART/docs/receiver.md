@@ -2,7 +2,8 @@
 
 ## Description
 
-![UART Diagram](docs/Rx_ASMD.jpg)
+![ASMD chart for receiver](Rx_ASMD.jpg)
+
 
 ## States
 - Idle: waits for start bit
