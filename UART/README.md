@@ -1,40 +1,28 @@
 # UART in Verilog
 
-This project implements a UART (Universal Asynchronous Receiver Transmitter) in Verilog.
+## 🧠 Architecture
+
+![UART Diagram](docs/Uart_chart)
 
 ---
 
-## 🧠 Architecture
+## 🔗 Blocks Description
 
-| Block | Description |
-|------|------------|
-| [Baud Rate Generator](docs/baudrate.md) | Generates sampling tick |
-| [Receiver](docs/receiver.md) | Receives serial data |
-| [Transmitter](docs/transmitter.md) | Sends serial data |
-| [Interface](docs/interface.md) | Control logic |
-| [Core](docs/core.md) | Top-level integration |
+### RX Path
+- [Baud Rate Generator](docs/baudrate.md)
+- [Receiver](docs/receiver.md)
+- [Interface RX](docs/interface_rx.md)
+
+### TX Path
+- [Interface TX](docs/interface_tx.md)
+- [Transmitter](docs/transmitter.md)
 
 ---
 
 ## 🔁 Data Flow
 
-TX Path:
-wr_uart → Interface → Transmitter → tx
+RX:
+rx → receiver → interface → r_data
 
-RX Path:
-rx → Receiver → Interface → rd_uart
-
----
-
-## 🧪 Testbench
-
-Loopback test: TX → RX
-
----
-
-## 📌 Features
-
-- 8-bit data
-- 1 stop bit
-- Oversampling (16x)
-- Configurable baud rate
+TX:
+w_data → interface → transmitter → tx
