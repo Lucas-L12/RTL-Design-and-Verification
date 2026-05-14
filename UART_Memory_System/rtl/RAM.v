@@ -23,14 +23,4 @@ module RAM
     
     assign mem_data_out=ram[mem_addr];
 
-
-
-
-
-
-
-
-
-
-
 endmodule
