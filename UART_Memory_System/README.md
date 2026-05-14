@@ -106,7 +106,7 @@ The FSM supervises:
 * UART response generation
 * Error handling
   
-![Top Level Architecture](docs/ASMD_Controller.png)
+      ![Top Level Architecture](docs/ASMD_Controller.png)
 
 ---
 
