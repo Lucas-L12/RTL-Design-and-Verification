@@ -88,7 +88,7 @@ tb/             UVM testbench sources (uvm_conv_tb_top.sv + all classes listed a
 Diagramas/      UVM hierarchy diagram
 ```
 
-> **Note:** all files above were developed and validated directly inside the Vivado project (`UVM_Conv_Accelerator.srcs/sim_1/new/`). Only `hello_test.sv`/`hello_tb_top.sv` (the initial UVM/XSim sanity check) have been copied into this repository folder so far — the rest of the `.sv` files listed in the component table above still need to be copied over from the Vivado project into `tb/` for the repository to be self-contained.
+> **Note:** `tb/` also keeps a few exploratory/throwaway files from the development process, left in place for transparency rather than deleted: `hello_test.sv`/`hello_tb_top.sv` (the very first UVM/XSim sanity check), `conv_item_smoke_test.sv`/`conv_item_module_test.sv` (early standalone validation of `conv_item`), and `uvm_test.sv` (an empty leftover module from an early naming-collision bug, see the RTL project's commit history). None of these are part of the actual testbench described above.
 
 ## Reproducing the results (Vivado)
 
@@ -118,6 +118,6 @@ Neither approach is "better" in an absolute sense: the traditional testbench was
 ## Known limitations / future work
 
 1. **Coverage not closed to 100%.** Two directed sequences (all-negative, all-positive image) would close the remaining `cp_max`/`cp_min` bins; not implemented (see "Functional coverage" above).
-2. **Repository not yet self-contained.** Most `.sv` files still live only in the local Vivado project and need to be copied into `tb/` (see "Repository structure" above).
-3. **No `test_smoke`.** `conv_test` already serves that role (single quick random image); a dedicated smoke test was considered redundant and not built separately.
-4. **Single simulator validated.** Only Vivado XSim (UVM 1.2) has been used; QuestaSim's Starter Edition license blocks `randomize()` (`svverification` restriction), so it was not a viable alternative for this project.
+2. **No `test_smoke`.** `conv_test` already serves that role (single quick random image); a dedicated smoke test was considered redundant and not built separately.
+3. **Single simulator validated.** Only Vivado XSim (UVM 1.2) has been used; QuestaSim's Starter Edition license blocks `randomize()` (`svverification` restriction), so it was not a viable alternative for this project.
+4. **A duplicate backdoor file (`mem_backdoor_if.sv`) is still in `tb/`.** It's an exact leftover copy of `mem_backdoor.sv` from before the file was renamed to escape a stale Vivado project reference (see "Backdoor loading" above) — only `mem_backdoor.sv` is actually used by the project's compile order; `mem_backdoor_if.sv` can be safely deleted.
