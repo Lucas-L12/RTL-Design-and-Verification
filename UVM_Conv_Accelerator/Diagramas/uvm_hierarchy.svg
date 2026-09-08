@@ -1,0 +1,121 @@
+<svg viewBox="0 0 1040 760" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333333"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f6feb"/>
+    </marker>
+  </defs>
+
+  <style>
+    .box { fill:#ffffff; stroke:#333333; stroke-width:1.5; }
+    .agentbox { fill:#f6f8fa; stroke:#333333; stroke-width:1.5; }
+    .envbox { fill:none; stroke:#666666; stroke-width:1.5; stroke-dasharray:6,4; }
+    .dutbox { fill:#fff4e5; stroke:#b35c00; stroke-width:1.5; }
+    .title { font-weight:bold; font-size:15px; fill:#111111; }
+    .sub { font-size:12px; fill:#111111; }
+    .small { font-size:11px; fill:#333333; }
+    .label { font-size:11px; fill:#1f6feb; }
+    .dutlabel { font-size:11px; fill:#b35c00; }
+    .conn { stroke:#333333; stroke-width:1.5; fill:none; marker-end:url(#arrow); }
+    .connBoth { stroke:#333333; stroke-width:1.5; fill:none; marker-end:url(#arrow); marker-start:url(#arrow); }
+    .apconn { stroke:#1f6feb; stroke-width:1.5; fill:none; marker-end:url(#arrowBlue); stroke-dasharray:5,3; }
+  </style>
+
+  <!-- uvm_test -->
+  <rect class="box" x="380" y="15" width="260" height="55" rx="6"/>
+  <text class="title" x="510" y="37" text-anchor="middle">test_random_images</text>
+  <text class="small" x="510" y="55" text-anchor="middle">(extends conv_test) : uvm_test</text>
+  <line x1="510" y1="70" x2="510" y2="98" class="conn"/>
+  <text class="small" x="520" y="88">creates</text>
+
+  <!-- conv_env container -->
+  <rect class="envbox" x="40" y="100" width="960" height="520" rx="10"/>
+  <text class="sub" x="60" y="122"><tspan font-weight="bold">conv_env</tspan> : uvm_env</text>
+
+  <!-- conv_agent container -->
+  <rect class="agentbox" x="70" y="140" width="470" height="430" rx="8"/>
+  <text class="sub" x="90" y="162"><tspan font-weight="bold">conv_agent</tspan> : uvm_agent</text>
+
+  <!-- sequencer -->
+  <rect class="box" x="100" y="185" width="180" height="70" rx="6"/>
+  <text class="title" x="190" y="212" text-anchor="middle">conv_sequencer</text>
+  <text class="small" x="190" y="230" text-anchor="middle">uvm_sequencer#(conv_item)</text>
+
+  <!-- driver -->
+  <rect class="box" x="100" y="300" width="180" height="100" rx="6"/>
+  <text class="title" x="190" y="328" text-anchor="middle">conv_driver</text>
+  <text class="small" x="190" y="346" text-anchor="middle">uvm_driver#(conv_item)</text>
+  <text class="small" x="190" y="362" text-anchor="middle">ap: uvm_analysis_port</text>
+  <text class="small" x="190" y="378" text-anchor="middle">vif, backdoor, mon_done</text>
+
+  <!-- monitor -->
+  <rect class="box" x="330" y="300" width="180" height="100" rx="6"/>
+  <text class="title" x="420" y="328" text-anchor="middle">conv_monitor</text>
+  <text class="small" x="420" y="346" text-anchor="middle">uvm_monitor</text>
+  <text class="small" x="420" y="362" text-anchor="middle">ap: uvm_analysis_port</text>
+  <text class="small" x="420" y="378" text-anchor="middle">vif, mon_done</text>
+
+  <!-- sequencer <-> driver -->
+  <line x1="190" y1="255" x2="190" y2="300" class="connBoth"/>
+  <text class="label" x="205" y="282">seq_item_port /</text>
+  <text class="label" x="205" y="295">seq_item_export</text>
+
+  <!-- scoreboard -->
+  <rect class="box" x="580" y="185" width="220" height="120" rx="6"/>
+  <text class="title" x="690" y="210" text-anchor="middle">conv_scoreboard</text>
+  <text class="small" x="690" y="228" text-anchor="middle">uvm_scoreboard</text>
+  <text class="small" x="690" y="244" text-anchor="middle">item_imp (conv_item)</text>
+  <text class="small" x="690" y="260" text-anchor="middle">result_imp (conv_result)</text>
+  <text class="small" x="690" y="278" text-anchor="middle">predictor SV propio</text>
+  <text class="small" x="690" y="294" text-anchor="middle">(round-half-to-even, scale=4)</text>
+
+  <!-- coverage -->
+  <rect class="box" x="580" y="340" width="220" height="100" rx="6"/>
+  <text class="title" x="690" y="365" text-anchor="middle">conv_coverage</text>
+  <text class="small" x="690" y="383" text-anchor="middle">uvm_subscriber#(conv_item)</text>
+  <text class="small" x="690" y="399" text-anchor="middle">analysis_export</text>
+  <text class="small" x="690" y="415" text-anchor="middle">covergroup img_cg</text>
+
+  <!-- driver.ap -> scoreboard.item_imp -->
+  <path d="M280,330 C 450,270 470,250 578,240" class="apconn"/>
+  <text class="label" x="430" y="255">driver.ap ap.connect(item_imp)</text>
+
+  <!-- driver.ap -> coverage.analysis_export -->
+  <path d="M280,345 C 420,400 470,395 578,385" class="apconn"/>
+  <text class="label" x="380" y="410">driver.ap.connect(coverage.analysis_export)</text>
+
+  <!-- monitor.ap -> scoreboard.result_imp -->
+  <path d="M510,320 C 545,290 555,275 578,262" class="apconn"/>
+  <text class="label" x="500" y="285">monitor.ap.connect(result_imp)</text>
+
+  <!-- DUT -->
+  <rect class="dutbox" x="250" y="540" width="440" height="150" rx="8"/>
+  <text class="title" x="470" y="562" text-anchor="middle">top.sv (DUT, sin modificar)</text>
+  <text class="small" x="470" y="580" text-anchor="middle">Memory_In -&gt; controller -&gt; conv_engine (9x MAC) -&gt; requantizer -&gt; Memory_out</text>
+  <text class="dutlabel" x="470" y="600" text-anchor="middle">conv_inf (virtual interface): rst, ct_ready, done_cont, read_addr, read_data</text>
+  <text class="dutlabel" x="470" y="616" text-anchor="middle">mem_backdoor_if (bind a Memory_In): write_pixel(addr, val)</text>
+  <text class="small" x="470" y="638" text-anchor="middle">uvm_hdl_deposit no funciona en la libreria UVM 1.2 de Vivado -&gt;</text>
+  <text class="small" x="470" y="654" text-anchor="middle">backdoor propio via `bind` + IS_GLOBAL_INCLUDE</text>
+
+  <!-- driver -> DUT -->
+  <path d="M190,400 C 190,480 300,520 340,540" class="conn"/>
+  <text class="small" x="200" y="490">vif.rst/ct_ready</text>
+  <text class="small" x="200" y="504">backdoor.write_pixel()</text>
+
+  <!-- DUT -> monitor -->
+  <path d="M600,540 C 560,470 480,420 430,400" class="conn"/>
+  <text class="small" x="540" y="470">vif.read_addr/read_data</text>
+  <text class="small" x="540" y="484">vif.done_cont</text>
+
+  <!-- legend -->
+  <rect x="60" y="700" width="14" height="14" fill="none" stroke="#333333"/>
+  <text class="small" x="80" y="711">componente UVM</text>
+  <line x1="220" y1="707" x2="260" y2="707" class="apconn"/>
+  <text class="small" x="266" y="711">analysis port (broadcast)</text>
+  <line x1="470" y1="707" x2="510" y2="707" class="conn"/>
+  <text class="small" x="516" y="711">conexion TLM / interfaz</text>
+  <rect x="700" y="700" width="14" height="14" fill="#fff4e5" stroke="#b35c00"/>
+  <text class="small" x="720" y="711">DUT (no modificado)</text>
+</svg>
