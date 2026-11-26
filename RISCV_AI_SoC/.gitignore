@@ -1,0 +1,7 @@
+sw/*.elf
+sw/*.bin
+sw/*.mem~
+vivado/
+*.jou
+*.log
+.Xil/
