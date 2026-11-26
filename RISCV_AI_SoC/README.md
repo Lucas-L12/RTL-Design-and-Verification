@@ -18,8 +18,7 @@ Phase 0 (processor, RAM, address decoder, test peripheral) and Phase 1 (accelera
 
 ## Why this project
 
-Existing RISC-V accelerator work at the university level tends to extend the core itself (custom instructions, vector or matrix units). This project instead attaches an accelerator as a memory-mapped device and measures the cost of moving data to and from it, which is the part those works do not study. It builds on an earlier standalone 2D convolution accelerator and its UVM verification environment, and on a from-scratch single-cycle RV32I core (`../RISCV_Core`).
-
+Existing RISC-V accelerator work at the university level tends to extend the core itself (custom instructions, vector or matrix units). This project instead attaches an accelerator as a memory-mapped device and measures the cost of moving data to and from it, which is the part those works do not study. It builds on an earlier standalone 2D convolution accelerator and its UVM verification environment. The processor in this SoC is the third-party PicoRV32; my own from-scratch RV32I core is a separate project in this repository (`../RISCV_Core`) and is not used here.
 ## Research Questions
 
 See [docs/research_questions.md](docs/research_questions.md).
